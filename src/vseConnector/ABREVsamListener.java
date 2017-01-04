@@ -1,9 +1,11 @@
+package vseConnector;
+
 import java.util.*;
 
 import com.ibm.vse.connector.*;
 
 /**
- * Class VsamListener
+ * Class ABREVsamListener
  * is called by the connector API when
  * the actual request finished. For each object retrieved from the host
  * the listAdded() method is called.
@@ -11,7 +13,7 @@ import com.ibm.vse.connector.*;
  * @version 1.0
  *
  */
-public class VsamListener implements VSEResourceListener
+public class ABREVsamListener implements VSEResourceListener
 {
   public Vector catVector, fileVector;
 
@@ -19,7 +21,7 @@ public class VsamListener implements VSEResourceListener
    * constructs a new LibrListener.
    *
    */
-  public VsamListener()
+  public ABREVsamListener()
   {
     catVector = new Vector();
     fileVector = new Vector();
@@ -62,7 +64,7 @@ public class VsamListener implements VSEResourceListener
    */
   public void listStarted(VSEResourceEvent event)
   {
-    System.out.println("VsamListener: listStarted()");
+    System.out.println("ABREVsamListener: listStarted()");
   }
 
   /**
@@ -81,16 +83,16 @@ public class VsamListener implements VSEResourceListener
     {
       VSEVsamCatalog cat = (VSEVsamCatalog)resource;
       catVector.addElement(cat);
-      System.out.println("VsamListener: listAdded(), cat = " + cat.getFileID() + ", name=" + cat.getName());
+      System.out.println("ABREVsamListener: listAdded(), cat = " + cat.getFileID() + ", name=" + cat.getName());
     }
     else if (resource instanceof VSEVsamCluster)
     {
       VSEVsamCluster file = (VSEVsamCluster)resource;
       fileVector.addElement(file);
-      System.out.println("VsamListener: listAdded(), cluster = " + file.getFileID() + ", name=" + file.getName());
+      System.out.println("ABREVsamListener: listAdded(), cluster = " + file.getFileID() + ", name=" + file.getName());
     }
     else
-      System.out.println("VsamListener: listAdded(), other VSE resource = " + resource.toString());
+      System.out.println("ABREVsamListener: listAdded(), other VSE resource = " + resource.toString());
   }
 
   /**
@@ -102,6 +104,6 @@ public class VsamListener implements VSEResourceListener
    */
   public void listEnded(VSEResourceEvent event)
   {
-    System.out.println("VsamListener: listEnded()");
+    System.out.println("ABREVsamListener: listEnded()");
   }
 }

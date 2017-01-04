@@ -1,4 +1,4 @@
-/******************************************************************************/
+package vseConnector; /******************************************************************************/
 /*           VSE/ESA Connector Framework - Example Code                       */
 /******************************************************************************/
 /*                                                                            */
@@ -33,15 +33,12 @@
 /******************************************************************************/
 
 import java.io.*;
-import java.math.*;
 import java.net.*;
 import java.util.*;
 
 import javax.resource.*;
 
 import com.ibm.vse.connector.*;
-
-import static com.ibm.sslite.s.r;
 
 /**
  * Class VsamDisplayExample
@@ -64,7 +61,7 @@ public class ABREAccessClient
     VSEVsamCluster cluster;
     VSEVsamRecord record, newRec = null;
     VSEVsamMap map;
-    VsamListener rl;
+    ABREVsamListener rl;
     String ipAddr = "10.49.103.238";
     String userID = "kristen", password = "kristen";
     List<VSEVsamRecord> vRecords;
@@ -97,7 +94,7 @@ public class ABREAccessClient
 
       /* Step 1: Create a listener that gets notified when objects */
       /* are retrieved from the host */
-    rl = new VsamListener();
+    rl = new ABREVsamListener();
     vsam.addVSEResourceListener(rl);
 
       /* Step 2: Get VSAM records from host using the given map */

@@ -1,4 +1,4 @@
-/******************************************************************************/
+package vseConnector; /******************************************************************************/
 /*           VSE/ESA Connector Framework - Example Code                       */
 /******************************************************************************/
 /*                                                                            */
@@ -95,7 +95,9 @@ A FLIGHT.ORDERING.FLIGHTS                      FLIGHTS VSESPUC
 
 */
 
-import com.ibm.vse.connector.*;
+import com.ibm.vse.connector.VSEConnectionSpec;
+import com.ibm.vse.connector.VSESystem;
+import com.ibm.vse.connector.VSEVsamMap;
 
 import java.net.InetAddress;
 
@@ -104,15 +106,15 @@ import java.net.InetAddress;
  * @version 1.0
  *
  */
-public class ABREVsamLiegenClient
+public class ABREVsamMapClient
 {
   // Default port number.
   static String   vsePort     = "2893";
 
   // Names of the Clusters and Maps.
-  static String vsamCatalog    = "ONLCAT";
-  static String clusterName = "P.ABR.LIEGEN";
-  static String mapName = "LIEGEN.MAP.SA813";
+  static String vsamCatalog    = "ABRE.UCAT";
+  static String clusterName = "P.VEX.DELTA";
+  static String mapName = "MAPDELTA";
 
   /**
    */
@@ -124,31 +126,27 @@ public class ABREVsamLiegenClient
 
       VSEConnectionSpec spec = new VSEConnectionSpec(InetAddress.getByName(vseHost), 2893, userID, password);
       system = new VSESystem(spec);
+      system.setConnectionMode(true);
 
       VSEVsamMap map = new VSEVsamMap(system, vsamCatalog, clusterName, mapName);
 
       if (map.isExistent()) {
-        map.delete();
-        System.out.println("Map already exist...");
+        System.out.println("Map properties");
+        System.out.println("  Map name         : " + map.getName());
+        System.out.println("  Catalog name     : " + map.getCatalog());
+        System.out.println("  Cluster name     : " + map.getCluster());
+        System.out.println("  System name      : " + map.getVSESystem());
+        System.out.println("  Number of fields : " + new Integer((map.getNoOfFields())).toString());
+        for (int i=0;i<map.getNoOfFields();i++)
+        {
+          System.out.println("  Field " + new Integer(i).toString() + " : " + map.getFieldName(i));
+          System.out.println("   type   = " + new Integer((map.getFieldType(i))).toString());
+          System.out.println("   length = " + new Integer((map.getFieldLength(i))).toString());
+          System.out.println("   offset = " + new Integer((map.getFieldOffset(i))).toString());
+        }
+      } else {
+        System.out.println("Map does not exist...");
       }
-      else {
-        map.create();
-        map.addField(new VSEVsamField(system, "SUCHBEGRIFF_1", VSEVsamMap.TYPE_PACKED, 13, 0));
-        map.addField(new VSEVsamField(system, "LFD-NR", VSEVsamMap.TYPE_PACKED, 5, 13));
-        map.addField(new VSEVsamField(system, "NOTIZ-EINZELZEILE", VSEVsamMap.TYPE_STRING, 79, 18));
-        map.addField(new VSEVsamField(system, "ERF-DATUM-KUNDENTEXT", VSEVsamMap.TYPE_UNSIGNED, 8, 97));
-        map.addField(new VSEVsamField(system, "FREI", VSEVsamMap.TYPE_STRING, 3, 105));
-        System.out.println("Map does not exist. Creating...");
-        System.out.println("Key-Fields: " + map.getPrimaryKeyFields());
-      }
-
-      VsamListener listener = new VsamListener();
-      VSEVsamCluster cluster = new VSEVsamCluster(system, vsamCatalog, clusterName);
-      cluster.addVSEResourceListener(listener);
-      cluster.setMaxRecords(100);
-      cluster.selectRecords(map);
-      cluster.removeVSEResourceListener(listener);
-
     } finally {
       system.disconnect();
     }

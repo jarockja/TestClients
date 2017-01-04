@@ -1,4 +1,4 @@
-/******************************************************************************/
+package vseConnector; /******************************************************************************/
 /*           VSE/ESA Connector Framework - Example Code                       */
 /******************************************************************************/
 /*                                                                            */
@@ -95,20 +95,17 @@ A FLIGHT.ORDERING.FLIGHTS                      FLIGHTS VSESPUC
 
 */
 
-import com.ibm.vse.connector.VSEConnectionSpec;
-import com.ibm.vse.connector.VSESystem;
-import com.ibm.vse.connector.VSEVsamMap;
+import com.ibm.vse.connector.*;
 
-import java.io.IOException;
 import java.net.InetAddress;
-import java.sql.*;
+import java.util.Vector;
 
 /**
  * Class JdbcExample.
  * @version 1.0
  *
  */
-public class ABREVsamMapClient
+public class ABREVsamExplorerClient
 {
   // Default port number.
   static String   vsePort     = "2893";
@@ -123,34 +120,68 @@ public class ABREVsamMapClient
   public static void main(String argv[]) throws Exception {
 
     VSESystem system = null;
+
     try {
       String vseHost = "10.49.103.238", userID = "connect", password = "connect";
 
       VSEConnectionSpec spec = new VSEConnectionSpec(InetAddress.getByName(vseHost), 2893, userID, password);
+      spec.setLogonMode(true);
+
       system = new VSESystem(spec);
-      system.setConnectionMode(true);
+      VSEVsam vsam = system.getVSEVsam();
+//      ABREVsamListener recordListener = new ABREVsamListener();
+//      vsam.addVSEResourceListener(recordListener);
+//      vsam.getCatalogList();
+//      vsam.removeVSEResourceListener(recordListener);
 
-      VSEVsamMap map = new VSEVsamMap(system, vsamCatalog, clusterName, mapName);
+      VSEVsamCatalog cat = vsam.getVSEVsamCatalog("ONLINE.UCAT");
+      VSEVsamCluster liegenCluster = cat.getVSEVsamCluster("P.ABR.LIEGEN");
 
-      if (map.isExistent()) {
-        System.out.println("Map properties");
-        System.out.println("  Map name         : " + map.getName());
-        System.out.println("  Catalog name     : " + map.getCatalog());
-        System.out.println("  Cluster name     : " + map.getCluster());
-        System.out.println("  System name      : " + map.getVSESystem());
-        System.out.println("  Number of fields : " + new Integer((map.getNoOfFields())).toString());
-        for (int i=0;i<map.getNoOfFields();i++)
-        {
-          System.out.println("  Field " + new Integer(i).toString() + " : " + map.getFieldName(i));
-          System.out.println("   type   = " + new Integer((map.getFieldType(i))).toString());
-          System.out.println("   length = " + new Integer((map.getFieldLength(i))).toString());
-          System.out.println("   offset = " + new Integer((map.getFieldOffset(i))).toString());
-        }
-      } else {
-        System.out.println("Map does not exist...");
-      }
-    } finally {
+//      vsam.addVSEResourceListener(recordListener);
+//      liegenCluster.getMapList();
+//      vsam.removeVSEResourceListener(recordListener);
+
+      final VSEVsamMap map = liegenCluster.getVSEVsamMap("LIB801D.CPY");
+
+      VSEVsamFilter filter = liegenCluster.getVSEVsamFilter();
+      filter.setField(map.getField(1));
+      filter.setFilter(new Long("1544400980801"));
+      filter.setOperation(VSEVsamFilter.OPERATION_EQUALS);
+      final VSEVsamRecord record1 = liegenCluster.getFirstRecord(map);
+      //final VSEVsamRecord record2 = liegenCluster.getLastRecord(map);
+
+      printRecord(record1);
+      //printRecord(record2);
+
+//      for (int i = 0; i < recordListener.getCatalogVector().size(); i++) {
+//        VSEVsamCatalog catalog = (VSEVsamCatalog) (recordListener.getCatalogVector().elementAt(i));
+//        if (catalog.getName().equals("ONLCAT")) {
+//            /* Get cluster list */
+//          catalog.addVSEResourceListener(recordListener);
+//          catalog.getClusterList();
+//          catalog.removeVSEResourceListener(recordListener);
+//          Vector<VSEVsamCluster> vClusters = recordListener.getFileVector();
+//          System.out.println("There are " + new Integer(vClusters.size()).toString() + " clusters in " + catalog.getName());
+//          for (VSEVsamCluster cluster : vClusters) {
+//            if (cluster.getName().equals("LIEGEN")) {
+//              System.out.println("reading connector maps for cluster: " + cluster.getName());
+//              cluster.addVSEResourceListener(recordListener);
+//              cluster.getMapList();
+//              cluster.removeVSEResourceListener(recordListener);
+//            }
+//          }
+//        }
+//      }
+    }
+    finally {
       system.disconnect();
     }
+  }
+  private static void printRecord(VSEVsamRecord record) throws Exception {
+
+    for(int i = 0; i < record.getNumberOfFields(); i++){
+      System.out.println("field: " + record.getFieldName(i) + " - " + record.getField(i));
+    }
+
   }
 }
