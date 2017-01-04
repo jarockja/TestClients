@@ -63,7 +63,7 @@ public class ABREAccessClient
     VSEVsamMap map;
     ABREVsamListener rl;
     String ipAddr = "10.49.103.238";
-    String userID = "kristen", password = "kristen";
+    String userID = "connect", password = "connect";
     List<VSEVsamRecord> vRecords;
 
     String catName = "ABRE.UCAT";
