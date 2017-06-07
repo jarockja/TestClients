@@ -1,7 +1,11 @@
 package tcConnect;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by jarockja on 04.01.2017.
@@ -15,6 +19,8 @@ public class TcAccessTestClient {
   private static String jdbcPort = "3021";
   private static String configDir = "D:/software/tcaccess";
 
+  private static Logger log = Logger.getGlobal();
+
   public static void main(String[] args) {
     Connection connection = null;
     Statement statement = null;
@@ -24,6 +30,7 @@ public class TcAccessTestClient {
         " /H:" + jdbcHost + // Verbindung mit Host IP-Adresse
         " /P:" + jdbcPort + // Verbindung mit Port
         " /L:N" + // Verbindung ohne Anmeldung
+        " /T:N" + // NO Trace
         " /S:tcajdbc.slc" + // Verbindung mit Hilfe von slc (Standard ist tcajdbc)
         " /D:" + TcaJdbc.JdbcDriver.DB_SQLENGINE + // SQL ENGINE
         " /Y:" + configDir; // ConfigDateienPfad
@@ -36,14 +43,24 @@ public class TcAccessTestClient {
       statement = connection.createStatement();
       System.out.println("Connection successful!");
 
+      long start = System.currentTimeMillis();
       ResultSet rs = statement.executeQuery("select CDREES.SA820.SA820_001N, CDREES.SA820.SA820_002N, CDREES.SA820.SA820_003, CDREES.SA820.SA820_UUID"
         + " from CDREES.SA820 Where CDREES.SA820.SA820_001N = " + lgNummer + "820 AND CDREES.SA820.SA820_003 <> 'S'");
+      long end = System.currentTimeMillis();
+      System.out.println("Query-exec took: " + (end - start) + " ms...");
 
-      ResultSetMetaData rsMeta = rs.getMetaData();
+      List<AbrUUID> list = new ArrayList<>();
+
       while(rs.next()) {
-        int colCount = rsMeta.getColumnCount();
-        for (int i = 1; i <= colCount; i++) {
-          System.out.println("Column: " + rsMeta.getColumnName(i) + ", value=" + rs.getString(i));
+        while (rs.next()){
+          AbrUUID uuid = new AbrUUID();
+          uuid.setDatei("SA820");
+          uuid.setUUID(rs.getString("SA820_UUID"));
+          uuid.setKey1(rs.getString("SA820_001N"));
+          uuid.setKey2(rs.getString("SA820_002N"));
+          uuid.setKey3(rs.getString("SA820_003"));
+          log.log(Level.INFO, "Adding new Row to list...");
+          list.add(uuid);
         }
       }
 
@@ -60,6 +77,53 @@ public class TcAccessTestClient {
       } catch (SQLException e) {
         e.printStackTrace();
       }
+    }
+  }
+  static class AbrUUID {
+    private String datei;
+    private String UUID;
+    private String key1;
+    private String key2;
+    private String key3;
+
+    public String getDatei() {
+      return datei;
+    }
+
+    public void setDatei(String datei) {
+      this.datei = datei;
+    }
+
+    public String getUUID() {
+      return UUID;
+    }
+
+    public void setUUID(String UUID) {
+      this.UUID = UUID;
+    }
+
+    public String getKey1() {
+      return key1;
+    }
+
+    public void setKey1(String key1) {
+      this.key1 = key1;
+    }
+
+    public String getKey2() {
+      return key2;
+    }
+
+    public void setKey2(String key2) {
+      this.key2 = key2;
+    }
+
+    public String getKey3() {
+      return key3;
+    }
+
+    public void setKey3(String key3) {
+      this.key3 = key3;
     }
   }
 }

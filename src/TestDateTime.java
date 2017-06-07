@@ -1,4 +1,6 @@
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.Objects;
 
@@ -11,6 +13,9 @@ public class TestDateTime {
     testDateTime("2016-01-01", "2016-01-01", "2016-01-02");
     testDateTime("2016-01-01", "2015-01-01", "2016-01-01");
     testDateTime("2016-01-01", "2016-03-01", "2016-03-02");
+
+    System.out.println(DateTime.parse("2015-06-27").getMillis());
+    System.out.println(DateTimeFormat.forPattern("yyyy-MM-dd").withZoneUTC().parseDateTime("2015-06-27").getMillis());
   }
 
   private static void testDateTime(String aaz, String einzug, String expected) {
