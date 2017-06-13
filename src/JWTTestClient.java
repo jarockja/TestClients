@@ -20,7 +20,7 @@ public class JWTTestClient {
    *   "lie": "1572003090"
    * }
    */
-  private static final String key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJQb3J0YWwiLCJzdWIiOiJrdW5kZW5OdW1tZXIiLCJleHAiOjE0OTczNTQ3MDIsImlhdCI6MTQ5NzM1MDc1NCwianRpIjoiaWQxMjM0NTYiLCJsaWUiOiIxNTcyMDAzMDkwIn0.Oj5wCc3l8SA4bz5hTyLLJrbIa_Azvbi7MJZ04VGeKlM";
+  private static final String key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrdW5kZW5OdW1tZXIiLCJpc3MiOiJQb3J0YWwiLCJpYXQiOjE0OTczNTgxNjEsImV4cCI6MTQ5NzM1ODI4MSwianRpIjoiaWQxMjM0NTYiLCJsaWUiOiIxNTcyMDAzMDkwIn0.TtBpCZqbwqpWb3aKqLUPjuePPwUpGh86Wf-hDzM2KyA";
 
   private static final long EXPIRATION_TIME = 2 * 60 * 1000; // 2 min
   private static final String SUBJECT = "kundenNummer";
