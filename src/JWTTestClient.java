@@ -51,6 +51,7 @@ public class JWTTestClient {
     createAndPrintToken("1583903441", "7250681");
     createAndPrintToken("1561112947", "2277496");
     createAndPrintToken("0684902296", "7530160");
+    createAndPrintToken("0769800336", "7037390");
     System.out.println();
     createAndPrintToken("4114203047", "7473357");
     createAndPrintToken("4114203330", "7642486");
@@ -59,6 +60,42 @@ public class JWTTestClient {
     createAndPrintToken("8200002688", "7745640");
     createAndPrintToken("8220008577", "6018637");
     createAndPrintToken("8220020607", "3147804");
+    System.out.println();
+    createAndPrintToken("3050019186", "3147804");
+    createAndPrintToken("3050076660", "3147804");
+    createAndPrintToken("3050007633", "3147804");
+    createAndPrintToken("4890300230", "3147804");
+    createAndPrintToken("3050300055", "3147804");
+    System.out.println();
+    createAndPrintToken("6143053111", "3147804");
+    createAndPrintToken("6143302928", "3147804");
+    createAndPrintToken("6143301921", "7268610");
+    createAndPrintToken("7921700312", "7268610");
+    System.out.println();
+    System.out.println();
+    createAndPrintToken("6143070440", "7268610");
+    createAndPrintToken("6143070458", "7268610");
+    createAndPrintToken("6143070466", "7268610");
+    createAndPrintToken("6143070474", "7268610");
+    createAndPrintToken("6143070482", "7268610");
+    System.out.println();
+    createAndPrintToken("6143070490", "7268610");
+    createAndPrintToken("6143070504", "7268610");
+    createAndPrintToken("6143070512", "7268610");
+    createAndPrintToken("6143070520", "7268610");
+    createAndPrintToken("6143070539", "7268610");
+    System.out.println();
+    createAndPrintToken("6143070547", "7268610");
+    createAndPrintToken("6143070555", "7268610");
+    createAndPrintToken("6143070563", "7268610");
+    createAndPrintToken("6143070571", "7268610");
+    createAndPrintToken("6143070580", "7268610");
+    System.out.println();
+    createAndPrintToken("6143070598", "7268610");
+    createAndPrintToken("6143070601", "7268610");
+    createAndPrintToken("6143070610", "7268610");
+    createAndPrintToken("6143070628", "7268610");
+    createAndPrintToken("6143070636", "7268610");
   }
 
   private static void createAndPrintToken(String lgNummer, String kundenNummer) {
@@ -66,7 +103,7 @@ public class JWTTestClient {
     System.out.println();
   }
 
-  public static String getToken(String lgNummer, String kundenNummer, boolean logToConsole) {
+  static String getToken(String lgNummer, String kundenNummer, boolean logToConsole) {
     String jwtStr = Jwts.builder()
       .setHeaderParam("typ", "JWT")
       .setSubject(SUBJECT)
@@ -76,7 +113,7 @@ public class JWTTestClient {
       .setId(JTI)
       .claim(CLAIM_LIEGENSCHAFT, lgNummer)
       .claim(CLAIM_KUNDE_NR, kundenNummer)
-      .claim(CLAIM_BACK_URL, "/")
+      .claim(CLAIM_BACK_URL, "/ion/")
       .signWith(SignatureAlgorithm.HS512, INIT_SECRET.getBytes())
       .compact();
 
