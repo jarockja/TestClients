@@ -1,6 +1,5 @@
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import java.util.Objects;
 
@@ -16,6 +15,7 @@ public class TestDateTime {
 
     System.out.println(DateTime.parse("2015-06-27").getMillis());
     System.out.println(DateTimeFormat.forPattern("yyyy-MM-dd").withZoneUTC().parseDateTime("2015-06-27").getMillis());
+    System.out.println(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").parseDateTime("2015-06-27 12:30:31").getMillis());
   }
 
   private static void testDateTime(String aaz, String einzug, String expected) {
