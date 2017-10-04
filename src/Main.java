@@ -4,6 +4,7 @@ import java.util.List;
 public class Main {
 
   public static void main(String[] args) {
+    System.out.println("TEST: " + 151231 + ", " + ((long) 151231 / 100));
     String tmp = "test";
     String[] test = {"test", "", null, "test2", "", "test3", "", null};
 
@@ -33,7 +34,7 @@ public class Main {
     String author;
     int year;
 
-    public Book(String title, String author, int year) {
+    Book(String title, String author, int year) {
       this.title = title;
       this.author = author;
       this.year = year;
