@@ -1,7 +1,5 @@
 import io.jsonwebtoken.*;
 
-import javax.xml.bind.DatatypeConverter;
-import java.security.Key;
 import java.util.Date;
 
 public class JWTTestClient {
@@ -56,7 +54,7 @@ public class JWTTestClient {
   }
 
   private static void createProdToken(String lgNummer) {
-    Date expiration = new Date(System.currentTimeMillis() + (60 * 1000));
+    Date expiration = new Date(System.currentTimeMillis() + (25 * 1000));
     createAndPrintToken(lgNummer, "2297222", expiration);
   }
 
