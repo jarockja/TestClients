@@ -23,7 +23,6 @@ public class JWTTestClient {
   private static final String key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrdW5kZW5OdW1tZXIiLCJpc3MiOiJQb3J0YWwiLCJpYXQiOjE0OTczNTgxNjEsImV4cCI6MTQ5NzM1ODI4MSwianRpIjoiaWQxMjM0NTYiLCJsaWUiOiIxNTcyMDAzMDkwIn0.TtBpCZqbwqpWb3aKqLUPjuePPwUpGh86Wf-hDzM2KyA";
 
   private static final long EXPIRATION_TIME = 2 * 1000; // 2 sec
-  private static final String SUBJECT = "kundenNummer";
   private static final String JTI = "id123456";
   private static final String INIT_SECRET = "RadioPaloma";
   private static final String CLAIM_LIEGENSCHAFT = "prp";
@@ -34,7 +33,7 @@ public class JWTTestClient {
   public static void main(String[] args) {
     //parseTokens();
     //createTokens();
-    createProdToken("1572003090");
+    createProdToken("6943902028");
   }
 
   private static void parseTokens() {
@@ -54,84 +53,84 @@ public class JWTTestClient {
   }
 
   private static void createProdToken(String lgNummer) {
-    Date expiration = new Date(System.currentTimeMillis() + (25 * 1000));
-    createAndPrintToken(lgNummer, "2297222", expiration);
+    Date expiration = new Date(System.currentTimeMillis() + (30 * 1000));
+    createAndPrintToken(lgNummer, "https://ide.ista.com/ide/", "2297222", expiration);
   }
 
   private static void createTokens() {
-    createAndPrintToken("1572003090", "2297222", null);
-    createAndPrintToken("1533218950", "2297222", null);
-    createAndPrintToken("1544400980", "2297222", null);
-    createAndPrintToken("1580402999", "2297222", null);
-    createAndPrintToken("1510142710", "2297222", null);
-    createAndPrintToken("1540600291", "2297222", null);
-    createAndPrintToken("1562618690", "2297222", null);
-    createAndPrintToken("1578707243", "2297222", null);
-    createAndPrintToken("1587008684", "7747534", null);
-    createAndPrintToken("1583903441", "7250681", null);
-    createAndPrintToken("1561112947", "2277496", null);
-    createAndPrintToken("0684902296", "7530160", null);
-    createAndPrintToken("0769800336", "7037390", null);
+    createAndPrintToken("1572003090", "http://localhost:4200:/", "2297222", null);
+    createAndPrintToken("1533218950", "http://localhost:4200:/", "2297222", null);
+    createAndPrintToken("1544400980", "http://localhost:4200:/", "2297222", null);
+    createAndPrintToken("1580402999", "http://localhost:4200:/", "2297222", null);
+    createAndPrintToken("1510142710", "http://localhost:4200:/", "2297222", null);
+    createAndPrintToken("1540600291", "http://localhost:4200:/", "2297222", null);
+    createAndPrintToken("1562618690", "http://localhost:4200:/", "2297222", null);
+    createAndPrintToken("1578707243", "http://localhost:4200:/", "2297222", null);
+    createAndPrintToken("1587008684", "http://localhost:4200:/", "7747534", null);
+    createAndPrintToken("1583903441", "http://localhost:4200:/", "7250681", null);
+    createAndPrintToken("1561112947", "http://localhost:4200:/", "2277496", null);
+    createAndPrintToken("0684902296", "http://localhost:4200:/", "7530160", null);
+    createAndPrintToken("0769800336", "http://localhost:4200:/", "7037390", null);
     System.out.println();
-    createAndPrintToken("4114203047", "7473357", null);
-    createAndPrintToken("4114203330", "7642486", null);
-    createAndPrintToken("8220001904", "7201698", null);
-    createAndPrintToken("8220001980", "7321517", null);
-    createAndPrintToken("8200002688", "7745640", null);
-    createAndPrintToken("8220008577", "6018637", null);
-    createAndPrintToken("8220020607", "3147804", null);
+    createAndPrintToken("4114203047", "http://localhost:4200:/", "7473357", null);
+    createAndPrintToken("4114203330", "http://localhost:4200:/", "7642486", null);
+    createAndPrintToken("8220001904", "http://localhost:4200:/", "7201698", null);
+    createAndPrintToken("8220001980", "http://localhost:4200:/", "7321517", null);
+    createAndPrintToken("8200002688", "http://localhost:4200:/", "7745640", null);
+    createAndPrintToken("8220008577", "http://localhost:4200:/", "6018637", null);
+    createAndPrintToken("8220020607", "http://localhost:4200:/", "3147804", null);
     System.out.println();
-    createAndPrintToken("3050019186", "3147804", null);
-    createAndPrintToken("3050076660", "3147804", null);
-    createAndPrintToken("3050007633", "3147804", null);
-    createAndPrintToken("4890300230", "3147804", null);
-    createAndPrintToken("3050300055", "3147804", null);
+    createAndPrintToken("3050019186", "http://localhost:4200:/", "3147804", null);
+    createAndPrintToken("3050076660", "http://localhost:4200:/", "3147804", null);
+    createAndPrintToken("3050007633", "http://localhost:4200:/", "3147804", null);
+    createAndPrintToken("4890300230", "http://localhost:4200:/", "3147804", null);
+    createAndPrintToken("3050300055", "http://localhost:4200:/", "3147804", null);
     System.out.println();
-    createAndPrintToken("6143053111", "3147804", null);
-    createAndPrintToken("6143302928", "3147804", null);
-    createAndPrintToken("6143301921", "7268610", null);
-    createAndPrintToken("7921700312", "7268610", null);
-    System.out.println();
-    System.out.println();
-    createAndPrintToken("6143070440", "7268610", null);
-    createAndPrintToken("6143070458", "7268610", null);
-    createAndPrintToken("6143070466", "7268610", null);
-    createAndPrintToken("6143070474", "7268610", null);
-    createAndPrintToken("6143070482", "7268610", null);
-    System.out.println();
-    createAndPrintToken("6143070490", "7268610", null);
-    createAndPrintToken("6143070504", "7268610", null);
-    createAndPrintToken("6143070512", "7268610", null);
-    createAndPrintToken("6143070520", "7268610", null);
-    createAndPrintToken("6143070539", "7268610", null);
-    System.out.println();
-    createAndPrintToken("6143070547", "7268610", null);
-    createAndPrintToken("6143070555", "7268610", null);
-    createAndPrintToken("6143070563", "7268610", null);
-    createAndPrintToken("6143070571", "7268610", null);
-    createAndPrintToken("6143070580", "7268610", null);
-    System.out.println();
-    createAndPrintToken("6143070598", "7268610", null);
-    createAndPrintToken("6143070601", "7268610", null);
-    createAndPrintToken("6143070610", "7268610", null);
-    createAndPrintToken("6143070628", "7268610", null);
-    createAndPrintToken("6143070636", "7268610", null);
+    createAndPrintToken("6143053111", "http://localhost:4200:/", "3147804", null);
+    createAndPrintToken("6143302928", "http://localhost:4200:/", "3147804", null);
+    createAndPrintToken("6143301921", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("7921700312", "http://localhost:4200:/", "7268610", null);
     System.out.println();
     System.out.println();
-    createAndPrintToken("4110020886", "7268610", null);
-    createAndPrintToken("7035306859", "7268610", null);
-    createAndPrintToken("6142009933", "7268610", null);
+    createAndPrintToken("6143070440", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070458", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070466", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070474", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070482", "http://localhost:4200:/", "7268610", null);
+    System.out.println();
+    createAndPrintToken("6143070490", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070504", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070512", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070520", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070539", "http://localhost:4200:/", "7268610", null);
+    System.out.println();
+    createAndPrintToken("6143070547", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070555", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070563", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070571", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070580", "http://localhost:4200:/", "7268610", null);
+    System.out.println();
+    createAndPrintToken("6143070598", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070601", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070610", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070628", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6143070636", "http://localhost:4200:/", "7268610", null);
+    System.out.println();
+    System.out.println();
+    createAndPrintToken("4110020886", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("7035306859", "http://localhost:4200:/", "7268610", null);
+    createAndPrintToken("6142009933", "http://localhost:4200:/", "7268610", null);
   }
 
-  private static void createAndPrintToken(String lgNummer, String kundenNummer, Date expiration) {
-    System.out.println(lgNummer + "\r\nlogin?Authorization=" + getToken(lgNummer, kundenNummer, expiration, false));
+  private static void createAndPrintToken(String lgNummer, String urlPrefix, String kundenNummer, Date expiration) {
+    System.out.println(lgNummer);
+    System.out.println(urlPrefix + "login?Authorization=" + getToken(lgNummer, kundenNummer, expiration, false));
     System.out.println();
   }
 
   static String getToken(String lgNummer, String kundenNummer, Date expiration, boolean logToConsole) {
     JwtBuilder builder = Jwts.builder()
       .setHeaderParam("typ", "JWT")
-      .setSubject(SUBJECT)
       .setIssuer("Portal")
       .setIssuedAt(new Date(System.currentTimeMillis()))
       .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
