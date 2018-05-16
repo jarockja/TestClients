@@ -34,7 +34,12 @@ public class JWTTestClient {
     //parseTokens();
     //createTokens("http://localhost:4200/");
     //createTokens("http://10.49.139.176:8180/ide/");
-    createProdToken("4110650120");
+    //createProdToken("https://ide.ista.com/ide/", "4110650120");
+    //createProdToken("https://ide1.ista.com/ide/", "4110650120");
+    //createProdToken("https://ide1-test.ista.com/ide/", "4110650120");
+    createProdToken("https://ide.ista.com/ide/", "6946019362");
+    //createProdToken("http://10.49.170.14:8020/ide/", "6946019362");
+    //createProdToken("http://10.49.139.242:8010/", "4110650120");
     // createProdToken("8220079113");
     //createPreProdToken("6143070687");
   }
@@ -55,14 +60,14 @@ public class JWTTestClient {
     }
   }
 
-  private static void createProdToken(String lgNummer) {
-    Date expiration = new Date(System.currentTimeMillis() + (30 * 1000));
-    createAndPrintToken(lgNummer, "https://ide.ista.com/ide/", "2297222", expiration);
+  private static void createProdToken(String baseUrl, String lgNummer) {
+    Date expiration = new Date(System.currentTimeMillis() + (50 * 1000));
+    createAndPrintToken(lgNummer, baseUrl, "2297222", expiration);
   }
 
   private static void createPreProdToken(String lgNummer) {
     Date expiration = new Date(System.currentTimeMillis() + (30 * 1000));
-    createAndPrintToken(lgNummer, "https://ide-test.ista.com/ide/", "2297222", expiration);
+    createAndPrintToken(lgNummer, "https://ide.ista.com/ide/", "2297222", expiration);
   }
 
   private static void createTokens(String baseUrl) {
