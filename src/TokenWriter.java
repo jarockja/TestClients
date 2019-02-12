@@ -27,7 +27,7 @@ public class TokenWriter {
       while ((lgNummer = reader.readLine()) != null) {
         if (StringUtils.isNotEmpty(lgNummer) && lgNummer.length() == 10) {
           counter++;
-          String token = JWTTestClient.getToken(lgNummer, "", null, false);
+          String token = JWTTestClient.getToken(lgNummer, "", null, false, false);
           writer.write(lgNummer);
           writer.write(" ");
           writer.write(token);
