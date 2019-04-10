@@ -1,4 +1,5 @@
 import io.jsonwebtoken.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 
@@ -36,25 +37,13 @@ public class JWTTestClient {
     //parseTokens();
     //createTokens("http://localhost:4200/");
     //createTokens("http://10.49.139.176:8180/ide/");
-    //createProdToken("https://ide.ista.com/ide/", "6946019362", false); // ABRE-Prod
 
-    //createProdToken("https://ide1.ista.com/ide/", "1680003021", false); // Cactus-Prod
-    //createProdToken("https://ide.ista.com/ide/", "1680002556", false); // Cactus-Prod
+    createProdToken("7035009838", "ABRE – DE", false);
+    createProdToken("5730701340", "ABRE – CH", false);
+    createProdToken("4889017592", "CACTUS – DE", false);
+    createProdToken("3200002937", "CACTUS – LU", false);
 
-    //createProdToken("https://ide1.ista.com/ide/", "4110650120", false);
-    //createProdToken("https://ide-test.ista.com/ide/", "6946019362", false);
-    System.out.print("Cactus-Test-LG: ");
-    createProdToken("https://ide.ista.com/ide/", "3900000994", false);
-
-    System.out.print("ABRE-Test-LG: ");
-    createProdToken("https://ide.ista.com/ide/", "6946019362", false);
-
-    //createProdToken("https://ide.ista.com/ide/", "6946019362", false);
-    //createProdToken("http://localhost:4200/", "1572003090", false);
-    //createProdToken("http://10.49.170.14:8020/ide/", "6946019362", false);
-    //createProdToken("http://10.49.139.242:8010/", "4110650120", false);
-    // createProdToken("8220079113");
-    //createPreProdToken("6143070687");
+    //createTestToken("4889017592", "CACTUS – DE", false);
   }
 
   private static void parseTokens() {
@@ -73,14 +62,16 @@ public class JWTTestClient {
     }
   }
 
-  private static void createProdToken(String baseUrl, String lgNummer, boolean simulation) {
+  private static void createProdToken(String lgNummer, String desc, boolean simulation) {
     Date expiration = new Date(System.currentTimeMillis() + (50 * 1000));
-    createAndPrintToken(lgNummer, baseUrl, "2297222", expiration, simulation);
+    System.out.print("Prod-LG: " + (StringUtils.isEmpty(desc) ? "" : "(" + desc + ")"));
+    createAndPrintToken(lgNummer, "https://ide.ista.com/ide/", "2297222", expiration, simulation);
   }
 
-  private static void createPreProdToken(String lgNummer, boolean simulation) {
+  private static void createTestToken(String lgNummer, String desc, boolean simulation) {
     Date expiration = new Date(System.currentTimeMillis() + (30 * 1000));
-    createAndPrintToken(lgNummer, "https://ide.ista.com/ide/", "2297222", expiration, simulation);
+    System.out.print("Test-LG: " + (StringUtils.isEmpty(desc) ? "" : "(" + desc + ")"));
+    createAndPrintToken(lgNummer, "https://ide-test.ista.com/ide/", "2297222", expiration, simulation);
   }
 
   private static void createTokens(String baseUrl) {
